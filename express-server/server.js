@@ -1,12 +1,9 @@
 // nacteni nastaveni ze souboru .env
 require('dotenv').config();
 
-// pouzite nastaveni
-const port = process.env.PORT;
+const app = require('./app');
+const port = process.env.PORT || 3000;
 
-// spusteni serveru pro aplikaci
-require('http').createServer(require('./app'))
-.listen(port, () => {
-    // hlaska pri spusteni serveru
+app.listen(port, () => {
     console.log(`Server běží na http://localhost:${port}`);
 });
