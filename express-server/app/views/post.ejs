@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%= titulek %></title>
+</head>
+<body>
+    <h1><%= titulek %></h1>
+    <% if(typeof prispevek == 'undefined' || prispevek == false) { %>
+        <p><i>Takový příspěvek neexistuje.</i></p>
+    <% } else { %>
+        <div id="<%= prispevek.id %>">
+            <h2><%= prispevek.nadpis %></h2>
+            <p><%= prispevek.obsah %></p>
+        </div>
+    <% } %>
+    <a href="/posts">Zpět</a>
+</body>
+</html>

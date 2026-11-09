@@ -24,10 +24,10 @@ router.get('/posts/:id', (req, res) => {
 	// nacteni dat pomoci modelu
 	const prispevek = model.nacistPrispevek(id);
 
-	if(prispevek)
-		console.log(prispevek);
-	else
-		console.log('Příspěvek s ID ' + id + ' neexistuje.');
+	res.render('post', {
+		titulek: 'Příspěvek',
+		prispevek: prispevek,
+	});
 });
 
 router.get('/posts', (req, res) => {
