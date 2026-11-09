@@ -1,7 +1,8 @@
 // nacteni kodu balicku databaze
 const jsondb = require('simple-json-db');
+const path = require('path');
 // vytvoreni databaze z datoveho souboru na disku
-const db = new jsondb('../data/posts.json');
+const db = new jsondb(path.join(__dirname, '../data/posts.json'));
 
 // nabizena funkcnost modelu
 exports.nacistPrispevky = () => {
