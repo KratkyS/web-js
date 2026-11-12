@@ -1,19 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="/css/style.css" />
     <title><%= titulek %></title>
 </head>
 <body>
     <h1><%= titulek %></h1>
+
+    <form action="/posts" method="POST">
+        <label for="nadpis">Nadpis:</label><br>
+        <input type="text" id="nadpis" name="nadpis" /><br><br>
+
+        <label for="obsah">Obsah:</label><br>
+        <textarea id="obsah" name="obsah"></textarea><br><br>
+
+        <button type="submit">Přidat příspěvek</button>
+    </form>
+
+    <hr>
+
     <% if(typeof prispevky == 'undefined' || prispevky.length == 0) { %>
         <p><i>Dosud neexistují žádné příspěvky.</i></p>
     <% } else { %>
-    <% for(let i = 0; i < prispevky.length; i++) { %>
-        <div id="<%= prispevky[i].id %>">
-            <p><%= prispevky[i].nadpis %> <a href="posts/<%= prispevky[i].id %>">detail</a></p>
-        </div>
-    <% }} %>
+        <% for(let i = 0; i < prispevky.length; i++) { %>
+            <div id="<%= prispevky[i].id %>">
+                <p>
+                    <strong><%= prispevky[i].nadpis %></strong>
+                    <a href="/posts/<%= prispevky[i].id %>">detail</a>
+                    <form action="/posts/<%= prispevky[i].id %>" method="POST">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button type="submit">Smazat</button>
+                    </form>
+                </p>
+            </div>
+        <% } %>
+    <% } %>
 </body>
 </html>
