@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Domů</title>
 </head>
 <body>
-    <header>
-        <h1>výtej na webu</h1>
-        <% let name = 'Šimon';%>
-        <p>Vítejte zde! <i> <%= name %></i></p>
-        <p>dnes je <b><%= new Date()%></b></p>
-    </header>
-    
+    <%- include('./partials/header') %>
+
+    <main>
+        <h1>Vítejte na webu</h1>
+        <% let name = 'Šimon'; %>
+        <p>Vítejte zde! <i><%= name %></i></p>
+        <p>Dnes je <b><%= new Date() %></b></p>
+    </main>
+
+    <%- include('./partials/footer') %>
 </body>
 </html>

@@ -6,35 +6,41 @@
     <title><%= titulek %></title>
 </head>
 <body>
-    <h1><%= titulek %></h1>
+    <%- include('./partials/header') %>
 
-    <form action="/posts" method="POST">
-        <label for="nadpis">Nadpis:</label><br>
-        <input type="text" id="nadpis" name="nadpis" /><br><br>
+    <main>
+        <h1><%= titulek %></h1>
 
-        <label for="obsah">Obsah:</label><br>
-        <textarea id="obsah" name="obsah"></textarea><br><br>
+        <form action="/posts" method="POST">
+            <label for="nadpis">Nadpis:</label><br>
+            <input type="text" id="nadpis" name="nadpis" /><br><br>
 
-        <button type="submit">Přidat příspěvek</button>
-    </form>
+            <label for="obsah">Obsah:</label><br>
+            <textarea id="obsah" name="obsah"></textarea><br><br>
 
-    <hr>
+            <button type="submit">Přidat příspěvek</button>
+        </form>
 
-    <% if(typeof prispevky == 'undefined' || prispevky.length == 0) { %>
-        <p><i>Dosud neexistují žádné příspěvky.</i></p>
-    <% } else { %>
-        <% for(let i = 0; i < prispevky.length; i++) { %>
-            <div id="<%= prispevky[i].id %>">
-                <p>
-                    <strong><%= prispevky[i].nadpis %></strong>
-                    <a href="/posts/<%= prispevky[i].id %>">detail</a>
-                    <form action="/posts/<%= prispevky[i].id %>" method="POST">
-                        <input type="hidden" name="_method" value="DELETE" />
-                        <button type="submit">Smazat</button>
-                    </form>
-                </p>
-            </div>
+        <hr>
+
+        <% if(typeof prispevky == 'undefined' || prispevky.length == 0) { %>
+            <p><i>Dosud neexistují žádné příspěvky.</i></p>
+        <% } else { %>
+            <% for(let i = 0; i < prispevky.length; i++) { %>
+                <div id="<%= prispevky[i].id %>">
+                    <p>
+                        <strong><%= prispevky[i].nadpis %></strong>
+                        <a href="/posts/<%= prispevky[i].id %>">detail</a>
+                        <form action="/posts/<%= prispevky[i].id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit">Smazat</button>
+                        </form>
+                    </p>
+                </div>
+            <% } %>
         <% } %>
-    <% } %>
+    </main>
+
+    <%- include('./partials/footer') %>
 </body>
 </html>

@@ -7,6 +7,13 @@ exports.index = (req, res) => {
 	});
 }
 
+// stranka o webu
+exports.about = (req, res) => {
+    res.render('about', {
+        titulek: 'O webu',
+    });
+}
+
 // chybova stranka
 exports.error = (req, res) => {
     res.render('error', {
