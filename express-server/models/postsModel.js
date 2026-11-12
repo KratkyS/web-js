@@ -20,3 +20,25 @@ exports.nacistPrispevek = (id) => {
 
     return false;
 };
+
+exports.pridatPrispevek = (nadpis, obsah) => {
+    const prispevky = db.JSON();
+    const nextId = prispevky.reduce((max, prispevek) => Math.max(max, Number(prispevek.id) || 0), 0) + 1;
+
+    prispevky.push({
+        id: nextId,
+        nadpis,
+        obsah,
+    });
+
+    db.JSON(prispevky);
+    return nextId;
+};
+
+exports.smazatPrispevek = (id) => {
+    const prispevky = db.JSON();
+    const filtered = prispevky.filter((prispevek) => String(prispevek.id) !== String(id));
+
+    db.JSON(filtered);
+    return filtered.length !== prispevky.length;
+};
