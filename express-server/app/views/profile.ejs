@@ -1,9 +1,23 @@
-<%- include('_partials/heads') %>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titulek %></title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <%- include('./partials/header') %>
 
-    <p>Jste přihlášeni jako <b><%= prihlasenyUzivatel %></b>!</p>
+    <main>
+        <h1>Profil uživatele</h1>
+        <p>Jste přihlášeni jako <b><%= prihlasenyUzivatel %></b>!</p>
 
-    <form action="/users/signout" method="post">
-        <input type="submit" value="Odhlásit" />
-    </form>
+        <form action="/users/signout" method="post">
+            <button type="submit">Odhlásit</button>
+        </form>
+    </main>
 
-<%- include('_partials/tails') %>
+    <%- include('./partials/footer') %>
+</body>
+</html>

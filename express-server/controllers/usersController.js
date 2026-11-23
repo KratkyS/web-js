@@ -11,8 +11,12 @@ exports.oneForm = (req, res) => {
 }
 
 exports.uniSign = (req, res) => {
-    const jmeno = req.body.jmeno;
-    const heslo = req.body.heslo;
+    const jmeno = String(req.body.jmeno || '').trim();
+    const heslo = String(req.body.heslo || '');
+
+    if(!jmeno || !heslo) {
+        return res.redirect('/users');
+    }
 
     if(model.existujeUzivatel(jmeno)) {
         if(model.spravneHeslo(jmeno, heslo)) {

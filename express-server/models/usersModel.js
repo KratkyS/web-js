@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
-
 const jsondb = require('simple-json-db');
-const db = new jsondb('../data/users.json');
+const path = require('path');
+
+const db = new jsondb(path.join(__dirname, '..', 'data', 'users.json'));
 
 exports.existujeUzivatel = (jmeno) => {
     return db.has(jmeno);
