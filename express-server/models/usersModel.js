@@ -30,3 +30,13 @@ exports.pridatUzivatele = (jmeno, heslo) => {
     db.sync();
     return true;
 }
+
+exports.odstranitUzivatele = (jmeno) => {
+    if(!db.has(jmeno)) {
+        return false;
+    }
+
+    db.delete(jmeno);
+    db.sync();
+    return true;
+}

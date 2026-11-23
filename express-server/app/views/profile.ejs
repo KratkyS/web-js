@@ -13,9 +13,23 @@
         <h1>Profil uživatele</h1>
         <p>Jste přihlášeni jako <b><%= prihlasenyUzivatel %></b>!</p>
 
+        <% if (chyba) { %>
+            <p role="alert"><%= chyba %></p>
+        <% } %>
+
         <form action="/users/signout" method="post">
             <button type="submit">Odhlásit</button>
         </form>
+
+        <section>
+            <h2>Zrušit účet</h2>
+            <p>Pro potvrzení zadejte své heslo. Tuto akci nelze vrátit.</p>
+            <form action="/users/delete" method="post" onsubmit="return confirm('Opravdu chcete trvale zrušit svůj účet?');">
+                <label for="delete-password">Heslo:</label><br />
+                <input type="password" id="delete-password" name="heslo" autocomplete="current-password" required />
+                <button type="submit">Trvale zrušit účet</button>
+            </form>
+        </section>
     </main>
 
     <%- include('./partials/footer') %>
