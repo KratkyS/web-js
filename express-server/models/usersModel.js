@@ -2,13 +2,16 @@ const bcrypt = require('bcryptjs');
 const jsondb = require('simple-json-db');
 const path = require('path');
 
-const db = new jsondb(path.join(__dirname, '..', 'data', 'users.json'));
+const dbPath = path.join(__dirname, '..', 'data', 'users.json');
+const loadDb = () => new jsondb(dbPath);
 
 exports.existujeUzivatel = (jmeno) => {
+    const db = loadDb();
     return db.has(jmeno);
 }
 
 exports.spravneHeslo = (jmeno, heslo) => {
+    const db = loadDb();
     if(!db.has(jmeno)) {
         return false;
     }
@@ -19,6 +22,7 @@ exports.spravneHeslo = (jmeno, heslo) => {
 }
 
 exports.pridatUzivatele = (jmeno, heslo) => {
+    const db = loadDb();
     if(db.has(jmeno)) {
         return false;
     }
@@ -27,16 +31,14 @@ exports.pridatUzivatele = (jmeno, heslo) => {
         heslo: bcrypt.hashSync(heslo, 10),
     });
 
-    db.sync();
     return true;
 }
 
 exports.odstranitUzivatele = (jmeno) => {
+    const db = loadDb();
     if(!db.has(jmeno)) {
         return false;
     }
 
-    db.delete(jmeno);
-    db.sync();
-    return true;
+    return db.delete(jmeno) === true;
 }

@@ -1,11 +1,5 @@
 {
-    "testovani": {
-        "heslo": "$2b$10$a/hf/9rLG2G6KHwsnFskzug/f1FHflypZ2emHG8oArPIUDf4B9qkW"
-    },
-    "e2e_mwt3azm9": {
-        "heslo": "$2b$10$WQ0kfYOgpt7.6b07OhNTeO1JnrLQ6VQJJbZNvJxV1JybEqg6JIjS2"
-    },
-    "delete_test_1795427887786": {
-        "heslo": "$2b$10$PAtOKcgeAoil/9gAuhyefOVJhC688eYMW7.dcaZPPdbYIZdkLoaE6"
+    "1": {
+        "heslo": "$2b$10$dKqKUzzgjgheSD5sZjvvjeEQ0f8wZD7HQFiGM1iReefe4Qy2heiOK"
     }
 }
