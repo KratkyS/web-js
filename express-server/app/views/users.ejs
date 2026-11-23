@@ -1,0 +1,11 @@
+<%- include('_partials/heads') %>
+    
+    <form action="/users/sign" method="post">
+        <input type="text" name="jmeno" placeholder="Jméno..." />
+        <br />
+        <input type="password" name="heslo" placeholder="Heslo..." />
+        <br />
+        <input type="submit" value="Vstoupit" />
+    </form>
+
+<%- include('_partials/tails') %>
