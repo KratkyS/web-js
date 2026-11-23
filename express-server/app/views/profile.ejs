@@ -1,5 +1,9 @@
 <%- include('_partials/heads') %>
 
-    <p>Jste přihlášeni!</p>
+    <p>Jste přihlášeni jako <b><%= prihlasenyUzivatel %></b>!</p>
+
+    <form action="/users/signout" method="post">
+        <input type="submit" value="Odhlásit" />
+    </form>
 
 <%- include('_partials/tails') %>
