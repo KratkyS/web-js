@@ -1,4 +1,5 @@
 const model = require('../models/usersModel');
+const postsModel = require('../models/postsModel');
 
 exports.oneForm = (req, res) => {
     if(req.session.prihlasenyUzivatel) {
@@ -63,6 +64,8 @@ exports.deleteAccount = (req, res, next) => {
     if(!model.odstranitUzivatele(jmeno)) {
         return next(new Error('Přihlášený uživatelský účet se nepodařilo najít.'));
     }
+
+    postsModel.smazatPrispevkyUzivatele(jmeno);
 
     req.session.destroy((error) => {
         if(error) {

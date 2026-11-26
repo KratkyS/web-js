@@ -1,5 +1,8 @@
 {
     "1": {
         "heslo": "$2b$10$dKqKUzzgjgheSD5sZjvvjeEQ0f8wZD7HQFiGM1iReefe4Qy2heiOK"
+    },
+    "jan": {
+        "heslo": "$2b$10$r8XI6WwhGRBm.uieRSWQq.m0/zmUy/ibPfY7VCAwb5ZLQ/RH/Uy7O"
     }
 }

@@ -21,7 +21,7 @@ exports.nacistPrispevek = (id) => {
     return false;
 };
 
-exports.pridatPrispevek = (nadpis, obsah) => {
+exports.pridatPrispevek = (nadpis, obsah, autor) => {
     const prispevky = db.JSON();
     const nextId = prispevky.reduce((max, prispevek) => Math.max(max, Number(prispevek.id) || 0), 0) + 1;
 
@@ -29,16 +29,37 @@ exports.pridatPrispevek = (nadpis, obsah) => {
         id: nextId,
         nadpis,
         obsah,
+        autor,
     });
 
     db.JSON(prispevky);
+    db.sync();
     return nextId;
 };
 
-exports.smazatPrispevek = (id) => {
+exports.smazatPrispevek = (id, autor) => {
     const prispevky = db.JSON();
-    const filtered = prispevky.filter((prispevek) => String(prispevek.id) !== String(id));
+    const prispevek = prispevky.find((prispevek) => String(prispevek.id) === String(id));
 
+    if(!prispevek || prispevek.autor !== autor) {
+        return false;
+    }
+
+    const filtered = prispevky.filter((prispevek) => String(prispevek.id) !== String(id));
     db.JSON(filtered);
-    return filtered.length !== prispevky.length;
+    db.sync();
+    return true;
+};
+
+exports.smazatPrispevkyUzivatele = (autor) => {
+    const prispevky = db.JSON();
+    const filtered = prispevky.filter((prispevek) => prispevek.autor !== autor);
+    const deletedCount = prispevky.length - filtered.length;
+
+    if(deletedCount > 0) {
+        db.JSON(filtered);
+        db.sync();
+    }
+
+    return deletedCount;
 };

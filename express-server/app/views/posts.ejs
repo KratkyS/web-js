@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
     <title><%= titulek %></title>
 </head>
 <body>
@@ -11,15 +12,19 @@
     <main>
         <h1><%= titulek %></h1>
 
-        <form action="/posts" method="POST">
-            <label for="nadpis">Nadpis:</label><br>
-            <input type="text" id="nadpis" name="nadpis" /><br><br>
+        <% if (prihlasenyUzivatel) { %>
+            <form action="/posts" method="POST">
+                <label for="nadpis">Nadpis:</label><br>
+                <input type="text" id="nadpis" name="nadpis" required /><br><br>
 
-            <label for="obsah">Obsah:</label><br>
-            <textarea id="obsah" name="obsah"></textarea><br><br>
+                <label for="obsah">Obsah:</label><br>
+                <textarea id="obsah" name="obsah" required></textarea><br><br>
 
-            <button type="submit">Přidat příspěvek</button>
-        </form>
+                <button type="submit">Přidat příspěvek</button>
+            </form>
+        <% } else { %>
+            <p><a href="/users">Přihlaste se</a> pro přidání příspěvku.</p>
+        <% } %>
 
         <hr>
 
@@ -31,10 +36,13 @@
                     <p>
                         <strong><%= prispevky[i].nadpis %></strong>
                         <a href="/posts/<%= prispevky[i].id %>">detail</a>
-                        <form action="/posts/<%= prispevky[i].id %>" method="POST">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            <button type="submit">Smazat</button>
-                        </form>
+                        <br>Autor: <%= prispevky[i].autor || 'Neznámý autor' %>
+                        <% if (prihlasenyUzivatel && prispevky[i].autor === prihlasenyUzivatel) { %>
+                            <form action="/posts/<%= prispevky[i].id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit">Smazat</button>
+                            </form>
+                        <% } %>
                     </p>
                 </div>
             <% } %>
